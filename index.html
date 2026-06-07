@@ -3,402 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRM – Technical Roof Management</title>
+<title>TRM – Technical Roof Management | Detección de fugas en cubiertas planas</title>
+<meta name="description" content="TRM – Technical Roof Management. Prueba de estanqueidad, detección de fugas y monitorización de cubiertas planas en toda España. Independiente, certificado y neutral.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1B3E78;
+  --blue-dark:#122d5a;
+  --blue-mid:#2563b0;
+  --text:#27313D;
+  --text-soft:#5a6472;
+  --border:#dde3ea;
+  --bg:#f5f7fa;
+  --white:#fff;
+  --nav-h:80px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;font-size:16px;line-height:1.6}
 
-:root {
-  --blue:       #1e4d8c;
-  --blue-dark:  #163a6b;
-  --blue-light: #2563b0;
-  --accent:     #1e4d8c;
-  --text:       #27313D;
-  --text-light: #5a6472;
-  --border:     #dde3ea;
-  --bg-light:   #f5f7fa;
-  --white:      #ffffff;
-  --nav-h:      80px;
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:var(--nav-h);background:var(--white);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;transition:box-shadow .3s;
 }
+nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.08)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo img{height:44px;width:auto;display:block}
+nav ul{list-style:none;display:flex;align-items:center;gap:24px}
+nav ul li>a{
+  font-size:14px;color:var(--text);text-decoration:none;font-weight:400;
+  padding:4px 0;border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;white-space:nowrap;
+}
+nav ul li>a:hover{color:var(--blue);border-bottom-color:var(--blue)}
+.nav-dropdown{position:relative}
+.nav-dropdown>a::after{content:' ▾';font-size:10px}
+.dropdown-menu{
+  display:none;position:absolute;top:calc(100% + 16px);left:0;
+  background:white;border:1px solid var(--border);
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  min-width:210px;padding:8px 0;z-index:300;
+}
+.nav-dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:9px 20px;font-size:14px;color:var(--text);text-decoration:none}
+.dropdown-menu a:hover{background:var(--bg);color:var(--blue)}
+.nav-cta{
+  background:var(--blue)!important;color:white!important;
+  padding:10px 20px!important;font-weight:600!important;
+  border-bottom:none!important;font-size:14px!important;
+  transition:background .2s!important;
+}
+.nav-cta:hover{background:var(--blue-dark)!important}
 
-html { scroll-behavior: smooth; }
-body { font-family: 'Source Sans 3', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; font-size: 16px; line-height: 1.6; }
+/* ── HERO ── */
+#hero{
+  margin-top:var(--nav-h);
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - var(--nav-h));
+}
+.hero-left{
+  padding:80px 60px 80px 80px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hero-left h1{
+  font-size:clamp(26px,3vw,44px);font-weight:700;line-height:1.15;
+  color:var(--text);margin-bottom:20px;
+}
+.hero-left p{font-size:17px;color:var(--text-soft);line-height:1.7;margin-bottom:36px;max-width:460px}
+.hero-links{display:flex;flex-direction:column}
+.hero-link-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 0;border-bottom:1px solid var(--border);
+  text-decoration:none;color:var(--text);font-size:15px;font-weight:600;
+  transition:color .2s;
+}
+.hero-link-item:first-child{border-top:1px solid var(--border)}
+.hero-link-item:hover{color:var(--blue)}
+.hero-link-item .arr{font-size:20px;color:var(--blue);flex-shrink:0}
+.hero-right{overflow:hidden;position:relative;min-height:500px}
+.hero-right img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  height: var(--nav-h);
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px;
+/* ── INTRO ── */
+#intro{border-top:1px solid var(--border)}
+.intro-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;padding:90px 80px;
 }
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-logo-box {
-  background: var(--blue); color: white;
-  font-size: 15px; font-weight: 700; letter-spacing: 0.5px;
-  padding: 6px 10px; line-height: 1;
+.intro-left h2{font-size:clamp(22px,2.5vw,34px);font-weight:700;line-height:1.2;margin-bottom:20px}
+.intro-left p{font-size:16px;color:var(--text-soft);line-height:1.75;margin-bottom:16px}
+.btn-primary{
+  display:inline-block;background:var(--blue);color:white;
+  padding:12px 28px;font-weight:600;font-size:15px;
+  text-decoration:none;margin-top:8px;transition:background .2s;
 }
-.nav-logo-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.2; }
-.nav-logo-text small { display: block; font-weight: 400; color: var(--text-light); font-size: 11px; }
-nav ul { list-style: none; display: flex; align-items: center; gap: 28px; }
-nav ul li > a {
-  font-size: 14px; color: var(--text); text-decoration: none; font-weight: 400;
-  padding: 4px 0; border-bottom: 2px solid transparent;
-  transition: color .2s, border-color .2s;
+.btn-primary:hover{background:var(--blue-dark)}
+.intro-right img{width:100%;display:block;height:420px;object-fit:cover}
+.btn-link{
+  display:inline-flex;align-items:center;gap:6px;color:var(--blue);
+  font-weight:600;font-size:15px;text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .2s;
 }
-nav ul li > a:hover { color: var(--blue); border-bottom-color: var(--blue); }
-.nav-dropdown { position: relative; }
-.nav-dropdown > a::after { content: ' ▾'; font-size: 10px; }
-.dropdown-menu {
-  display: none; position: absolute; top: calc(100% + 16px); left: 0;
-  background: white; border: 1px solid var(--border);
-  box-shadow: 0 4px 20px rgba(0,0,0,.08);
-  min-width: 200px; padding: 8px 0; z-index: 300;
-}
-.nav-dropdown:hover .dropdown-menu { display: block; }
-.dropdown-menu a { display: block; padding: 8px 20px; font-size: 14px; color: var(--text); text-decoration: none; }
-.dropdown-menu a:hover { background: var(--bg-light); color: var(--blue); }
-.nav-cta {
-  background: var(--blue); color: white !important;
-  padding: 10px 20px !important; border: none !important;
-  font-weight: 600 !important; font-size: 14px !important;
-  transition: background .2s !important;
-}
-.nav-cta:hover { background: var(--blue-dark) !important; border-color: transparent !important; }
-.nav-langs { display: flex; gap: 8px; }
-.nav-langs a { font-size: 13px; color: var(--text-light); text-decoration: none; font-weight: 600; }
-.nav-langs a.active { color: var(--blue); }
+.btn-link::after{content:'→'}
+.btn-link:hover{border-bottom-color:var(--blue)}
 
-/* ─── HERO ─── */
-#hero {
-  margin-top: var(--nav-h);
-  background: var(--white);
-  display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 560px;
+/* ── FEATURE SPLIT ── */
+.feat{display:grid;grid-template-columns:1fr 1fr;min-height:500px}
+.feat.rev{direction:rtl}
+.feat.rev>*{direction:ltr}
+.feat-img{overflow:hidden}
+.feat-img img{width:100%;height:100%;object-fit:cover;display:block}
+.feat-body{
+  padding:80px 70px;
+  display:flex;flex-direction:column;justify-content:center;
 }
-.hero-left {
-  padding: 80px 60px 80px 80px;
-  display: flex; flex-direction: column; justify-content: center;
+.feat-body.dark{background:#1a2e48}
+.feat-body.dark h3,.feat-body.dark p,.feat-body.dark li{color:rgba(255,255,255,.85)}
+.feat-body.dark p{color:rgba(255,255,255,.65)}
+.feat-body.dark .btn-link{color:#7ab4e8}
+.feat-body.dark .feat-list li{border-bottom-color:rgba(255,255,255,.1)}
+.feat-body h3{
+  font-size:clamp(18px,2vw,28px);font-weight:700;line-height:1.2;
+  color:var(--text);margin-bottom:16px;
 }
-.hero-left h1 {
-  font-size: clamp(28px, 3.5vw, 46px);
-  font-weight: 700; line-height: 1.15;
-  color: var(--text); margin-bottom: 20px;
+.feat-body p{font-size:15px;color:var(--text-soft);line-height:1.75;margin-bottom:12px}
+.feat-list{list-style:none;margin:20px 0 28px}
+.feat-list li{
+  padding:10px 0 10px 20px;border-bottom:1px solid var(--border);
+  font-size:15px;color:var(--text-soft);position:relative;
 }
-.hero-left p { font-size: 17px; color: var(--text-light); line-height: 1.7; margin-bottom: 36px; max-width: 460px; }
-.hero-links { display: flex; flex-direction: column; gap: 0; }
-.hero-link-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 0; border-bottom: 1px solid var(--border);
-  text-decoration: none; color: var(--text);
-  font-size: 15px; font-weight: 600;
-  transition: color .2s;
-}
-.hero-link-item:first-child { border-top: 1px solid var(--border); }
-.hero-link-item:hover { color: var(--blue); }
-.hero-link-item .arrow { font-size: 18px; color: var(--blue); }
-.hero-right {
-  background: var(--bg-light);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
-}
-.hero-right img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.feat-list li::before{content:'—';position:absolute;left:0;color:var(--blue);font-weight:700}
 
-/* ─── SECTION BASE ─── */
-.section { padding: 80px 80px; max-width: 1280px; margin: 0 auto; }
-.section-sm { padding: 60px 80px; max-width: 1280px; margin: 0 auto; }
-.full-w { max-width: none; padding-left: 0; padding-right: 0; }
+/* ── 2 CARDS ── */
+.cards-row{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cards-row-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.info-card{padding:60px 70px;border-right:1px solid var(--border)}
+.info-card:last-child{border-right:none}
+.info-card h4{font-size:20px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.3}
+.info-card p{font-size:15px;color:var(--text-soft);line-height:1.75;margin-bottom:20px}
 
-h2.section-title {
-  font-size: clamp(22px, 2.5vw, 32px);
-  font-weight: 700; color: var(--text); line-height: 1.2;
-  margin-bottom: 20px;
+/* ── DOWNLOADS BANNER ── */
+.dl-banner{
+  background:var(--blue);padding:26px 80px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-.section-text { font-size: 16px; color: var(--text-light); line-height: 1.75; }
-.btn-primary {
-  display: inline-block; background: var(--blue); color: white;
-  padding: 12px 28px; font-weight: 600; font-size: 15px;
-  text-decoration: none; border: none; cursor: pointer;
-  transition: background .2s;
+.dl-banner p{color:white;font-size:16px;font-weight:600;display:flex;align-items:center;gap:12px}
+.dl-banner a{
+  color:white;font-size:14px;font-weight:600;text-decoration:none;
+  display:inline-flex;align-items:center;gap:4px;
+  border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px;
 }
-.btn-primary:hover { background: var(--blue-dark); }
-.btn-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  color: var(--blue); font-weight: 600; font-size: 15px;
-  text-decoration: none; border-bottom: 1px solid transparent;
-  transition: border-color .2s;
-}
-.btn-link:hover { border-bottom-color: var(--blue); }
-.btn-link::after { content: '→'; }
+.dl-banner a::after{content:'→'}
+.dl-banner a:hover{border-bottom-color:white}
 
-/* ─── INTRO ─── */
-#intro {
-  border-top: 1px solid var(--border);
-  background: var(--white);
+/* ── BENEFITS ── */
+#beneficios{border-top:1px solid var(--border)}
+.ben-header{max-width:1280px;margin:0 auto;padding:70px 80px 40px}
+.ben-header h2{font-size:clamp(22px,2.5vw,32px);font-weight:700;color:var(--text)}
+.ben-grid{
+  max-width:1280px;margin:0 auto;padding:0 80px;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  border-top:1px solid var(--border);
 }
-.intro-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-  align-items: center; padding: 80px;
+.ben-item{
+  padding:40px 24px;border-right:1px solid var(--border);text-align:center;
+  transition:background .2s;
 }
-.intro-left h2 { margin-bottom: 20px; }
-.intro-left p { margin-bottom: 16px; font-size: 16px; color: var(--text-light); line-height: 1.75; }
-.intro-left .btn-primary { margin-top: 12px; }
-.intro-right { position: relative; }
-.intro-right img { width: 100%; display: block; }
+.ben-item:last-child{border-right:none}
+.ben-item:hover{background:var(--bg)}
+.ben-icon{
+  width:64px;height:64px;margin:0 auto 16px;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+.ben-icon svg{width:32px;height:32px;stroke:var(--blue);fill:none;stroke-width:1.5}
+.ben-item h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+.ben-item p{font-size:13px;color:var(--text-soft);line-height:1.6}
 
-/* ─── FEATURE BLOCKS (sensor / leak) ─── */
-.feature-block {
-  display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 480px;
+/* ── DARK BANNER ── */
+.dark-banner{
+  background:#1a2e48;padding:56px 80px;text-align:center;
 }
-.feature-block.reverse { direction: rtl; }
-.feature-block.reverse > * { direction: ltr; }
-.feat-img { overflow: hidden; }
-.feat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.feat-body {
-  padding: 80px 70px;
-  display: flex; flex-direction: column; justify-content: center;
-  background: var(--white);
-}
-.feat-body.dark {
-  background: #1a2e48;
-}
-.feat-body.dark h2,
-.feat-body.dark h3 { color: white; }
-.feat-body.dark p { color: rgba(255,255,255,.7); }
-.feat-body.dark .btn-link { color: #7ab4e8; }
-.feat-body.dark .feat-list li { color: rgba(255,255,255,.8); border-bottom-color: rgba(255,255,255,.1); }
-.feat-body h3 {
-  font-size: clamp(20px, 2vw, 28px);
-  font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 16px;
-}
-.feat-body p { font-size: 15px; color: var(--text-light); line-height: 1.75; margin-bottom: 12px; }
-.feat-list { list-style: none; margin: 20px 0 28px; }
-.feat-list li {
-  padding: 10px 0 10px 20px; border-bottom: 1px solid var(--border);
-  font-size: 15px; color: var(--text-light); position: relative;
-}
-.feat-list li::before { content: '—'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+.dark-banner p{color:rgba(255,255,255,.65);font-size:18px;font-weight:300;letter-spacing:.3px}
 
-/* ─── CARD ROW (2 cards side by side) ─── */
-.cards-row {
-  background: var(--bg-light);
-  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+/* ── TESTIMONIAL ── */
+#testimonial{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.testi-inner{max-width:900px;margin:0 auto;padding:80px;text-align:center}
+.testi-inner blockquote{
+  font-size:clamp(19px,2.5vw,30px);font-weight:300;color:var(--text);
+  line-height:1.5;font-style:italic;margin-bottom:28px;
+  quotes:'\201C''\201D';
 }
-.cards-row-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr;
-  padding: 0;
+.testi-inner blockquote::before{
+  content:open-quote;font-size:64px;color:var(--blue);
+  line-height:0;vertical-align:-22px;margin-right:4px;font-style:normal;
 }
-.info-card {
-  padding: 60px 70px;
-  border-right: 1px solid var(--border);
+.testi-inner blockquote::after{
+  content:close-quote;font-size:64px;color:var(--blue);
+  line-height:0;vertical-align:-22px;margin-left:4px;font-style:normal;
 }
-.info-card:last-child { border-right: none; }
-.info-card h4 {
-  font-size: 20px; font-weight: 700; color: var(--text);
-  margin-bottom: 14px; line-height: 1.3;
-}
-.info-card p { font-size: 15px; color: var(--text-light); line-height: 1.75; margin-bottom: 20px; }
+.testi-author{font-size:14px;color:var(--text-soft);font-weight:600}
+.testi-btn{margin-top:32px}
 
-/* ─── DOWNLOADS BANNER ─── */
-.downloads-banner {
-  background: var(--blue);
-  padding: 28px 80px;
-  display: flex; align-items: center; justify-content: space-between;
-  max-width: none;
+/* ── CERTS ── */
+#certs{background:var(--bg);border-bottom:1px solid var(--border)}
+.certs-inner{max-width:1280px;margin:0 auto;padding:60px 80px}
+.certs-inner h3{font-size:18px;font-weight:700;color:var(--text);margin-bottom:36px}
+.certs-logos{display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+.cert-logo{
+  background:white;border:1px solid var(--border);
+  padding:12px 16px;height:72px;
+  display:flex;align-items:center;justify-content:center;
 }
-.downloads-banner p { color: white; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 14px; }
-.downloads-banner p span { font-size: 24px; }
-.downloads-banner a {
-  color: white; font-size: 14px; font-weight: 600;
-  display: inline-flex; align-items: center; gap: 6px;
-  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.4);
-  padding-bottom: 2px;
-}
-.downloads-banner a:hover { border-bottom-color: white; }
-.downloads-banner a::after { content: '→'; }
+.cert-logo img{height:48px;width:auto;object-fit:contain;filter:grayscale(100%);opacity:.7;transition:opacity .2s,filter .2s}
+.cert-logo:hover img{filter:grayscale(0%);opacity:1}
 
-/* ─── BENEFITS ─── */
-#beneficios { background: var(--white); border-top: 1px solid var(--border); }
-.benefits-header { max-width: 1280px; margin: 0 auto; padding: 70px 80px 40px; }
-.benefits-header h2 { margin-bottom: 0; }
-.benefits-grid {
-  max-width: 1280px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  border-top: 1px solid var(--border);
-  padding: 0 80px;
+/* ── TABS ── */
+#tabs-section{background:var(--white)}
+.tabs-wrapper{max-width:1280px;margin:0 auto;padding:80px}
+.tabs-nav{display:flex;border-bottom:2px solid var(--border);gap:0}
+.tab-btn{
+  padding:14px 26px;font-size:14px;font-weight:600;
+  color:var(--text-soft);cursor:pointer;background:none;border:none;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:color .2s,border-color .2s;white-space:nowrap;
 }
-.benefit-item {
-  padding: 40px 0 40px 0;
-  border-right: 1px solid var(--border);
-  padding-right: 30px; padding-left: 30px;
-  text-align: center;
-}
-.benefit-item:first-child { padding-left: 0; }
-.benefit-item:last-child { border-right: none; padding-right: 0; }
-.benefit-icon-wrap {
-  width: 64px; height: 64px; margin: 0 auto 16px;
-  background: var(--bg-light);
-  display: flex; align-items: center; justify-content: center;
-}
-.benefit-icon-wrap svg { width: 32px; height: 32px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
-.benefit-item h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.benefit-item p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tab-btn:hover{color:var(--blue)}
+.tab-panels{border:1px solid var(--border);border-top:none}
+.tab-panel{display:none}
+.tab-panel.active{display:grid;grid-template-columns:1fr 1fr}
+.tab-body{padding:56px 60px;display:flex;flex-direction:column;justify-content:center}
+.tab-body h4{font-size:22px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.3}
+.tab-body p{font-size:15px;color:var(--text-soft);line-height:1.75;margin-bottom:20px}
+.tab-img{overflow:hidden;min-height:340px;background:var(--bg)}
+.tab-img img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* ─── DIGITAL BANNER ─── */
-.digital-banner {
-  background: #1a2e48;
-  padding: 60px 80px;
-  text-align: center;
+/* ── CTA ── */
+#cta-section{background:var(--blue);padding:80px;text-align:center}
+#cta-section h2{color:white;font-size:clamp(22px,3vw,38px);font-weight:700;margin-bottom:12px}
+#cta-section p{color:rgba(255,255,255,.75);font-size:16px;margin-bottom:32px}
+.btn-white{
+  display:inline-block;background:white;color:var(--blue);
+  padding:14px 36px;font-weight:700;font-size:15px;
+  text-decoration:none;transition:background .2s;
 }
-.digital-banner p {
-  color: rgba(255,255,255,.65); font-size: 18px; font-weight: 300;
-  letter-spacing: 0.5px;
-}
+.btn-white:hover{background:#f0f4f8}
 
-/* ─── TESTIMONIAL ─── */
-#testimonial {
-  background: var(--white);
-  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+/* ── FOOTER ── */
+footer{background:#27313D;padding:64px 80px 28px}
+.ft-grid{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:56px;
+  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:28px;
 }
-.testimonial-inner {
-  max-width: 900px; margin: 0 auto; padding: 80px;
-  text-align: center;
+.ft-brand .logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.ft-brand .logo-wrap img{height:40px;width:auto;filter:brightness(0) invert(1)}
+.ft-brand p{font-size:13px;line-height:1.7;color:rgba(255,255,255,.5);margin-bottom:20px}
+.ft-socials{display:flex;gap:10px}
+.ft-social{
+  width:34px;height:34px;border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s;text-decoration:none;
 }
-.testimonial-inner blockquote {
-  font-size: clamp(20px, 2.5vw, 30px);
-  font-weight: 300; color: var(--text); line-height: 1.5;
-  font-style: italic; margin-bottom: 28px;
+.ft-social:hover{border-color:rgba(255,255,255,.6)}
+.ft-social svg{width:15px;height:15px;fill:rgba(255,255,255,.6)}
+.ft-col h5{
+  color:white;font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:16px;
 }
-.testimonial-inner blockquote::before { content: '"'; font-size: 60px; color: var(--blue); line-height: 0; vertical-align: -20px; margin-right: 4px; }
-.testimonial-inner blockquote::after  { content: '"'; font-size: 60px; color: var(--blue); line-height: 0; vertical-align: -20px; margin-left: 4px; }
-.testimonial-author { font-size: 14px; color: var(--text-light); font-weight: 600; }
-.testimonial-btn { margin-top: 32px; }
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:9px}
+.ft-col a{font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.ft-col a:hover{color:white}
+.ft-contact p{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:7px;line-height:1.6}
+.ft-contact a{color:rgba(255,255,255,.5);text-decoration:none}
+.ft-contact a:hover{color:white}
+.ft-bottom{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.ft-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+.ft-legal{display:flex;gap:20px}
+.ft-legal a{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none}
+.ft-legal a:hover{color:rgba(255,255,255,.6)}
 
-/* ─── CERTIFICATIONS ─── */
-#certs { background: var(--bg-light); border-bottom: 1px solid var(--border); }
-.certs-inner {
-  max-width: 1280px; margin: 0 auto;
-  padding: 60px 80px;
-}
-.certs-inner h3 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 36px; }
-.certs-logos {
-  display: flex; flex-wrap: wrap; gap: 32px; align-items: center;
-}
-.cert-logo {
-  background: white; border: 1px solid var(--border);
-  width: 110px; height: 70px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; color: var(--text-light);
-  text-align: center; letter-spacing: 0.5px; text-transform: uppercase;
-  padding: 8px;
-}
-
-/* ─── TABS SECTION ─── */
-#tabs-section { background: var(--white); }
-.tabs-wrapper { max-width: 1280px; margin: 0 auto; padding: 80px; }
-.tabs-nav {
-  display: flex; border-bottom: 2px solid var(--border);
-  margin-bottom: 0; gap: 0;
-}
-.tab-btn {
-  padding: 14px 28px; font-size: 14px; font-weight: 600;
-  color: var(--text-light); cursor: pointer; background: none; border: none;
-  border-bottom: 3px solid transparent; margin-bottom: -2px;
-  transition: color .2s, border-color .2s;
-}
-.tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
-.tab-btn:hover { color: var(--blue); }
-.tab-panels { border: 1px solid var(--border); border-top: none; }
-.tab-panel { display: none; }
-.tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; }
-.tab-panel-body { padding: 60px 60px; display: flex; flex-direction: column; justify-content: center; }
-.tab-panel-body h4 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.3; }
-.tab-panel-body p { font-size: 15px; color: var(--text-light); line-height: 1.75; margin-bottom: 20px; }
-.tab-panel-img { overflow: hidden; min-height: 340px; background: var(--bg-light); }
-.tab-panel-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-/* ─── CONTACT FOOTER ─── */
-#contact-cta {
-  background: var(--blue);
-  padding: 80px;
-  text-align: center;
-}
-#contact-cta h2 { color: white; font-size: clamp(24px, 3vw, 38px); margin-bottom: 12px; }
-#contact-cta p { color: rgba(255,255,255,.75); font-size: 16px; margin-bottom: 32px; }
-.btn-white {
-  display: inline-block; background: white; color: var(--blue);
-  padding: 13px 32px; font-weight: 700; font-size: 15px;
-  text-decoration: none; transition: background .2s;
-}
-.btn-white:hover { background: #f0f4f8; }
-
-/* ─── FOOTER ─── */
-footer {
-  background: var(--text); color: rgba(255,255,255,.6);
-  padding: 60px 80px 30px;
-}
-.footer-top {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 60px; padding-bottom: 50px;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-  margin-bottom: 28px;
-}
-.footer-brand .nav-logo-box { display: inline-block; margin-bottom: 14px; }
-.footer-brand p { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,.5); margin-bottom: 20px; }
-.footer-socials { display: flex; gap: 10px; }
-.social-icon {
-  width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.2);
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color .2s;
-}
-.social-icon:hover { border-color: rgba(255,255,255,.6); }
-.social-icon svg { width: 15px; height: 15px; fill: rgba(255,255,255,.6); }
-.footer-col h5 {
-  color: white; font-size: 13px; font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 8px; }
-.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
-.footer-col ul li a:hover { color: white; }
-.footer-contact-info p { font-size: 13px; color: rgba(255,255,255,.5); margin-bottom: 6px; line-height: 1.6; }
-.footer-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; }
-.footer-contact-info a:hover { color: white; }
-.footer-bottom {
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 12px;
-}
-.footer-legal { display: flex; gap: 20px; }
-.footer-legal a { font-size: 12px; color: rgba(255,255,255,.35); text-decoration: none; }
-.footer-legal a:hover { color: rgba(255,255,255,.7); }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  nav ul, .nav-langs { display: none; }
-  #hero, .intro-inner, .feature-block, .cards-row-inner, .tab-panel.active, .footer-top { grid-template-columns: 1fr; }
-  .section, .section-sm, .intro-inner, .downloads-banner, .benefits-header, .certs-inner, .tabs-wrapper, #contact-cta, footer { padding-left: 24px; padding-right: 24px; }
-  .benefits-grid { grid-template-columns: repeat(2,1fr); padding: 0 24px; }
-  .hero-left { padding: 50px 24px; }
-  .feat-body { padding: 50px 24px; }
-  .info-card { padding: 40px 24px; border-right: none; border-bottom: 1px solid var(--border); }
-  .footer-bottom { flex-direction: column; gap: 12px; }
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:0 20px}
+  nav ul{display:none}
+  #hero,.intro-inner,.feat,.cards-row-inner,.tab-panel.active,.ft-grid{grid-template-columns:1fr}
+  .hero-left{padding:50px 24px}
+  .hero-right{min-height:320px}
+  .feat.rev{direction:ltr}
+  .feat-body,.info-card,.tab-body{padding:48px 24px}
+  .ben-grid{grid-template-columns:repeat(2,1fr);padding:0 24px}
+  .ben-item{border-right:none;border-bottom:1px solid var(--border)}
+  .intro-inner,.ben-header,.certs-inner,.tabs-wrapper,.dl-banner,#cta-section,footer,.dark-banner{padding-left:24px;padding-right:24px}
+  .ft-bottom{flex-direction:column;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- ── NAV ── -->
+<nav id="main-nav">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-box">TRM</div>
-    <div class="nav-logo-text">Technical Roof Management <small>España</small></div>
+    <img src="img/logo-trm.png" alt="TRM Technical Roof Management">
   </a>
   <ul>
     <li><a href="#prueba-estanqueidad">Prueba de estanqueidad</a></li>
@@ -431,65 +350,61 @@ footer {
     </li>
     <li><a href="#contacto" class="nav-cta">Contacto</a></li>
   </ul>
-  <div class="nav-langs">
-    <a href="#" class="active">ES</a>
-    <a href="#">EN</a>
-  </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-left">
     <h1>Tu cubierta plana digital puede hacer más.</h1>
-    <p>Contratos de mantenimiento, inventarios o catalogación con drones — nuestros servicios individuales de cubierta están adaptados exactamente a tus necesidades.</p>
-    <div class="hero-links">
+    <p>Contratos de mantenimiento, inventarios o catalogación con drones — nuestros servicios de cubierta están adaptados exactamente a tus necesidades.</p>
+    <nav class="hero-links" aria-label="Servicios principales">
       <a href="#pv" class="hero-link-item">
-        <span>¿Está tu cubierta plana lista para fotovoltaica? ¡Haz el check!</span>
-        <span class="arrow">→</span>
+        <span>¿Está tu cubierta plana PV-Ready? ¡Haz el check!</span>
+        <span class="arr">→</span>
       </a>
       <a href="#servicios" class="hero-link-item">
         <span>Servicios de cubierta</span>
-        <span class="arrow">→</span>
+        <span class="arr">→</span>
       </a>
       <a href="#prueba-estanqueidad" class="hero-link-item">
         <span>Prueba de estanqueidad</span>
-        <span class="arrow">→</span>
+        <span class="arr">→</span>
       </a>
       <a href="#deteccion-fugas" class="hero-link-item">
         <span>Detección de fugas</span>
-        <span class="arrow">→</span>
+        <span class="arr">→</span>
       </a>
       <a href="#monitorizacion" class="hero-link-item">
         <span>Monitorización</span>
-        <span class="arrow">→</span>
+        <span class="arr">→</span>
       </a>
-    </div>
+    </nav>
   </div>
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80" alt="Cubierta plana TRM">
+    <img src="img/hero.jpg" alt="Técnico TRM inspeccionando cubierta plana">
   </div>
 </section>
 
-<!-- INTRO -->
+<!-- ── INTRO ── -->
 <section id="intro">
   <div class="intro-inner">
     <div class="intro-left">
       <h2>TRM Technical Roof Management — independiente, neutral y certificado.</h2>
       <p>Una cubierta plana con fugas genera costes elevados en tiempo y recursos. Con TRM estás en buenas manos: ya sea en pruebas de estanqueidad, detección de fugas o servicios de mantenimiento individuales.</p>
-      <p>Como uno de los proveedores líderes en gestión sostenible de cubiertas en España, ofrecemos un servicio fiable y con tecnología de vanguardia.</p>
+      <p>Como proveedor líder en gestión sostenible de cubiertas en España, ofrecemos un servicio fiable con tecnología de vanguardia. Actuamos siempre de forma independiente y neutral.</p>
       <a href="#servicios" class="btn-primary">Nuestros servicios</a>
     </div>
     <div class="intro-right">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Gestión de cubiertas TRM">
+      <img src="img/intro.jpg" alt="Gestión profesional de cubiertas TRM">
     </div>
   </div>
 </section>
 
-<!-- FEATURE: SENSOR / ROSI -->
-<section id="rosi" style="padding:0; max-width:none;">
-  <div class="feature-block">
+<!-- ── FEATURE: ROSI / SENSOR ── -->
+<div id="rosi">
+  <div class="feat">
     <div class="feat-img">
-      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80" alt="Tecnología sensores TRM">
+      <img src="img/rosi.jpg" alt="Tecnología sensores ROSI TRM">
     </div>
     <div class="feat-body dark">
       <h3>Tecnología de sensores de última generación para la medición de humedad</h3>
@@ -499,34 +414,34 @@ footer {
         <li>Sin costes adicionales de hardware</li>
         <li>30 años de garantía de funcionamiento</li>
       </ul>
-      <a href="#rosi" class="btn-link" style="color:#7ab4e8;">Más información</a>
+      <a href="#contacto" class="btn-link" style="color:#7ab4e8">Más información</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FEATURE: LEAK TEST -->
-<section id="prueba-estanqueidad" style="padding:0; max-width:none;">
-  <div class="feature-block reverse">
+<!-- ── FEATURE: ESTANQUEIDAD ── -->
+<div id="prueba-estanqueidad">
+  <div class="feat rev">
     <div class="feat-img">
-      <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80" alt="Prueba de estanqueidad TRM">
+      <img src="img/estanqueidad.jpg" alt="Prueba de estanqueidad TRM">
     </div>
     <div class="feat-body">
       <h3>Prueba de estanqueidad certificada y neutral para toda cubierta plana.</h3>
-      <p>Obtén un estado objetivo con la prueba de estanqueidad TRM — certificada ISO y conforme a la normativa de calidad vigente.</p>
+      <p>Ya sea para aceptar, entregar o adquirir un edificio — la inspección neutral de la impermeabilización ofrece un estado objetivo de cada superficie de cubierta.</p>
       <ul class="feat-list">
         <li>La prevención primero — protección frente a daños graves</li>
         <li>Para inspecciones y recepciones de edificios — comprobaciones independientes</li>
-        <li>Ayuda rápida y localización de todas las fugas en caso de daño</li>
+        <li>Localización rápida de todas las fugas en caso de daño</li>
       </ul>
       <a href="#contacto" class="btn-link">Más información</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- 2 CARDS ROW -->
-<div class="cards-row" id="deteccion-fugas">
+<!-- ── 2 CARDS ── -->
+<div class="cards-row">
   <div class="cards-row-inner">
-    <div class="info-card">
+    <div class="info-card" id="deteccion-fugas">
       <h4>Detección de fugas en cubiertas planas al más alto nivel.</h4>
       <p>Con el innovador método de detección de fugas de TRM (HV-TRM), las fugas y zonas potencialmente dañadas se localizan con precisión milimétrica y el paquete de capas se examina para detectar humedad de forma completamente no destructiva.</p>
       <a href="#contacto" class="btn-link">Más información</a>
@@ -539,90 +454,90 @@ footer {
   </div>
 </div>
 
-<!-- DOWNLOADS BANNER -->
-<div class="downloads-banner full-w" style="padding:28px 80px;">
-  <p><span>📄</span> Pliegos de condiciones TRM</p>
+<!-- ── DOWNLOADS BANNER ── -->
+<div class="dl-banner">
+  <p>📄 &nbsp;Pliegos de condiciones TRM</p>
   <a href="#contacto">Más información</a>
 </div>
 
-<!-- BENEFITS -->
+<!-- ── BENEFITS ── -->
 <section id="beneficios">
-  <div class="benefits-header">
-    <h2>Cómo te beneficias</h2>
-  </div>
-  <div class="benefits-grid">
-    <div class="benefit-item">
-      <div class="benefit-icon-wrap">
+  <div class="ben-header"><h2>Cómo te beneficias</h2></div>
+  <div class="ben-grid">
+    <div class="ben-item">
+      <div class="ben-icon">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
       <h4>Certificados</h4>
-      <p>Somos certificados ISO y cumplimos con la normativa de calidad vigente</p>
+      <p>Certificados ISO y conformes a la normativa de calidad vigente en España</p>
     </div>
-    <div class="benefit-item">
-      <div class="benefit-icon-wrap">
+    <div class="ben-item">
+      <div class="ben-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </div>
       <h4>Independientes</h4>
       <p>Actuamos objetivamente como empresa independiente y neutral</p>
     </div>
-    <div class="benefit-item">
-      <div class="benefit-icon-wrap">
+    <div class="ben-item">
+      <div class="ben-icon">
         <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
       <h4>Experimentados</h4>
-      <p>Contamos con una amplia experiencia en proyectos de cubierta</p>
+      <p>Amplia experiencia en proyectos de cubierta en toda España</p>
     </div>
-    <div class="benefit-item">
-      <div class="benefit-icon-wrap">
+    <div class="ben-item">
+      <div class="ben-icon">
         <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </div>
       <h4>Innovadores</h4>
       <p>Utilizamos y desarrollamos sistemas de última generación</p>
     </div>
-    <div class="benefit-item">
-      <div class="benefit-icon-wrap">
+    <div class="ben-item">
+      <div class="ben-icon">
         <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       </div>
       <h4>Rentables</h4>
-      <p>Garantizamos una excelente relación calidad-precio</p>
+      <p>Garantizamos una excelente relación calidad-precio en cada proyecto</p>
     </div>
   </div>
 </section>
 
-<!-- DIGITAL BANNER -->
-<div class="digital-banner">
+<!-- ── DARK BANNER ── -->
+<div class="dark-banner">
   <p>La tecnología de sensores de última generación hace que tu cubierta plana sea digital.</p>
 </div>
 
-<!-- TESTIMONIAL -->
+<!-- ── TESTIMONIAL ── -->
 <section id="testimonial">
-  <div class="testimonial-inner">
+  <div class="testi-inner">
     <blockquote>¡Excelente colaboración y siempre resultados impecables en las detecciones de fugas realizadas por TRM!</blockquote>
-    <p class="testimonial-author">Carlos Martínez, Facility Manager / Consultor</p>
-    <div class="testimonial-btn">
+    <p class="testi-author">Carlos Martínez, Facility Manager / Consultor</p>
+    <div class="testi-btn">
       <a href="#rosi" class="btn-primary">Más información sobre el sistema de monitorización R.O.S.I.</a>
     </div>
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
+<!-- ── CERTIFICATIONS ── -->
 <section id="certs">
   <div class="certs-inner">
     <h3>Certificaciones y membresías</h3>
     <div class="certs-logos">
-      <div class="cert-logo">RAL Quality Mark</div>
-      <div class="cert-logo">Partner TRM</div>
-      <div class="cert-logo">DIN EN ISO 9001</div>
-      <div class="cert-logo">DIN ISO 45001</div>
-      <div class="cert-logo">RAWTA Miembro</div>
-      <div class="cert-logo">IQDF Miembro</div>
-      <div class="cert-logo">DGNB Miembro</div>
-      <div class="cert-logo">Roof Alliance</div>
+      <div class="cert-logo"><img src="img/cert-ral.png" alt="RAL Gütezeichen"></div>
+      <div class="cert-logo"><img src="img/cert-iso9001.png" alt="DIN EN ISO 9001"></div>
+      <div class="cert-logo"><img src="img/cert-iso45001.png" alt="DIN ISO 45001"></div>
+      <div class="cert-logo"><img src="img/cert-dgnb.png" alt="DGNB Miembro"></div>
+      <div class="cert-logo"><img src="img/cert-iqdf.png" alt="IQDF Miembro"></div>
+      <div class="cert-logo"><img src="img/cert-dekra.png" alt="DEKRA Zertifiziert"></div>
+      <div class="cert-logo"><img src="img/cert-bugg.jpg" alt="BuGG Miembro"></div>
+      <div class="cert-logo"><img src="img/cert-roofalliance.png" alt="Roof Alliance"></div>
+      <div class="cert-logo"><img src="img/cert-rawta.png" alt="RAWTA Miembro"></div>
+      <div class="cert-logo"><img src="img/cert-kununu.jpg" alt="Kununu Top Company 2024"></div>
     </div>
   </div>
 </section>
 
-<!-- TABS SECTION -->
+<!-- ── TABS ── -->
 <section id="tabs-section" id="servicios">
   <div class="tabs-wrapper">
     <div class="tabs-nav">
@@ -634,80 +549,83 @@ footer {
     </div>
     <div class="tab-panels">
       <div class="tab-panel active">
-        <div class="tab-panel-body">
+        <div class="tab-body">
           <h4>Seguro y certificado ante fugas.</h4>
           <p>Ya sea para aceptar, entregar o adquirir un edificio — la inspección neutral de la impermeabilización para zonas dañadas o defectos ofrece un estado objetivo de cada superficie de cubierta.</p>
           <a href="#contacto" class="btn-link">Más información</a>
         </div>
-        <div class="tab-panel-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Prueba estanqueidad"></div>
+        <div class="tab-img"><img src="img/tab1.jpg" alt="Prueba de estanqueidad"></div>
       </div>
       <div class="tab-panel">
-        <div class="tab-panel-body">
+        <div class="tab-body">
           <h4>Detección de fugas al más alto nivel.</h4>
-          <p>Gracias a nuestros procedimientos profesionales de detección de fugas, las fugas pueden localizarse de forma rápida y precisa en caso de daño, evitando así costosas obras de restauración.</p>
+          <p>Gracias a nuestros procedimientos profesionales de detección, las fugas pueden localizarse de forma rápida y precisa, evitando costosas obras de restauración.</p>
           <a href="#contacto" class="btn-link">Más información</a>
         </div>
-        <div class="tab-panel-img"><img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=600&q=80" alt="Detección fugas"></div>
+        <div class="tab-img"><img src="img/tab2.jpg" alt="Detección de fugas"></div>
       </div>
       <div class="tab-panel">
-        <div class="tab-panel-body">
+        <div class="tab-body">
           <h4>Preserva el valor del edificio a largo plazo.</h4>
           <p>Contratos de mantenimiento, inventarios o catalogación con drones — nuestros servicios individuales de cubierta están adaptados exactamente a tus necesidades.</p>
           <a href="#contacto" class="btn-link">Más información</a>
         </div>
-        <div class="tab-panel-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Servicios cubierta"></div>
+        <div class="tab-img"><img src="img/tab3.jpg" alt="Servicios de cubierta"></div>
       </div>
       <div class="tab-panel">
-        <div class="tab-panel-body">
-          <h4>La máxima seguridad de monitorización.</h4>
-          <p>Ya sea para aceptar, entregar o adquirir un edificio — la inspección neutral de la impermeabilización ofrece un estado objetivo de cada superficie de cubierta.</p>
+        <div class="tab-body">
+          <h4>La máxima seguridad con monitorización constante.</h4>
+          <p>Con TRM Roof Monitoring ofrecemos soluciones para monitorizar cubiertas planas de forma segura y protegerlas a largo plazo — completamente a medida.</p>
           <a href="#contacto" class="btn-link">Más información</a>
         </div>
-        <div class="tab-panel-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Monitorización"></div>
+        <div class="tab-img"><img src="img/tab4.jpg" alt="Monitorización de cubiertas"></div>
       </div>
       <div class="tab-panel">
-        <div class="tab-panel-body">
+        <div class="tab-body">
           <h4>Tu cubierta plana digital puede hacer más.</h4>
-          <p>Una cubierta plana con fugas puede ser costosa. TRM hace que las pruebas de estanqueidad y la monitorización sean más fáciles y eficaces que nunca gracias a la innovadora tecnología de sensores R.O.S.I.</p>
+          <p>Una cubierta plana con fugas puede ser costosa. TRM hace que las pruebas de estanqueidad y la monitorización sean más eficaces que nunca gracias a la tecnología R.O.S.I.</p>
           <a href="#contacto" class="btn-link">Más información</a>
         </div>
-        <div class="tab-panel-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="ROSI"></div>
+        <div class="tab-img"><img src="img/tab5.jpg" alt="R.O.S.I. monitorización"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT CTA -->
-<section id="contact-cta">
+<!-- ── CTA ── -->
+<section id="cta-section">
   <h2>¿Quieres más información o un presupuesto?</h2>
   <p>Nuestro equipo técnico te responde en menos de 24 horas.</p>
   <a href="mailto:info@trm-spain.com" class="btn-white">Enviar consulta</a>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer id="contacto">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="nav-logo-box">TRM</div>
-      <p>TRM – Technical Roof Management<br>Calle Ejemplo 1, 1º · 28001 Madrid, España</p>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <div class="logo-wrap">
+        <img src="img/logo-trm.png" alt="TRM Technical Roof Management">
+      </div>
+      <p>TRM – Technical Roof Management<br>Gestión profesional de cubiertas planas en España.</p>
+      <p>Calle Ejemplo 1, 1º · 28001 Madrid</p>
       <p>T <a href="tel:+34900000000">+34 900 000 000</a></p>
       <p><a href="mailto:info@trm-spain.com">info@trm-spain.com</a></p>
-      <div class="footer-socials" style="margin-top:16px;">
-        <a href="#" class="social-icon" aria-label="Facebook">
-          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="LinkedIn">
+      <div class="ft-socials" style="margin-top:16px">
+        <a href="#" class="ft-social" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="#" class="social-icon" aria-label="YouTube">
-          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:var(--text)"/></svg>
+        <a href="#" class="ft-social" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="#" class="social-icon" aria-label="X / Twitter">
-          <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20" stroke="rgba(255,255,255,.6)" stroke-width="2" fill="none"/></svg>
+        <a href="#" class="ft-social" aria-label="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:#27313D"/></svg>
+        </a>
+        <a href="#" class="ft-social" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="rgba(255,255,255,.6)" stroke-width="2"/></svg>
         </a>
       </div>
     </div>
-    <div class="footer-col">
+    <div class="ft-col">
       <h5>Servicios</h5>
       <ul>
         <li><a href="#">Prueba de estanqueidad</a></li>
@@ -718,7 +636,7 @@ footer {
         <li><a href="#">R.O.S.I.</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div class="ft-col">
       <h5>Empresa</h5>
       <ul>
         <li><a href="#">Sobre nosotros</a></li>
@@ -729,16 +647,16 @@ footer {
         <li><a href="#">Equipo</a></li>
       </ul>
     </div>
-    <div class="footer-col footer-contact-info">
+    <div class="ft-col ft-contact">
       <h5>Contacto</h5>
       <p>Calle Ejemplo 1, 1º<br>28001 Madrid, España</p>
       <p><a href="tel:+34900000000">+34 900 000 000</a></p>
       <p><a href="mailto:info@trm-spain.com">info@trm-spain.com</a></p>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div class="ft-bottom">
     <p>© 2025 TRM – Technical Roof Management Spain S.L.</p>
-    <div class="footer-legal">
+    <div class="ft-legal">
       <a href="#">Aviso legal</a>
       <a href="#">Política de privacidad</a>
       <a href="#">Condiciones generales</a>
@@ -748,22 +666,18 @@ footer {
 </footer>
 
 <script>
-function showTab(i) {
-  document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', i===j));
-  document.querySelectorAll('.tab-panel').forEach((p,j) => p.classList.toggle('active', i===j));
+function showTab(i){
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  document.querySelectorAll('.tab-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
 }
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
-  });
+window.addEventListener('scroll',()=>{
+  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>10);
 });
-
-// Nav border on scroll
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').style.boxShadow = window.scrollY > 10 ? '0 2px 12px rgba(0,0,0,.08)' : 'none';
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
 });
 </script>
 </body>
